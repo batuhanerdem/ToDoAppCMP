@@ -6,20 +6,18 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.serialization)
 }
 
 kotlin {
     androidTarget {
-        @OptIn(ExperimentalKotlinGradlePluginApi::class)
-        compilerOptions {
+        @OptIn(ExperimentalKotlinGradlePluginApi::class) compilerOptions {
             jvmTarget.set(JvmTarget.JVM_11)
         }
     }
 
     listOf(
-        iosX64(),
-        iosArm64(),
-        iosSimulatorArm64()
+        iosX64(), iosArm64(), iosSimulatorArm64()
     ).forEach { iosTarget ->
         iosTarget.binaries.framework {
             baseName = "ComposeApp"
@@ -32,6 +30,12 @@ kotlin {
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
+
+            implementation(libs.essenty.lifecycle)
+            implementation(libs.essenty.statekeeper)
+            implementation(libs.essenty.instancekeeper)
+            implementation(libs.essenty.backhandler)
+
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -44,11 +48,17 @@ kotlin {
             implementation(libs.androidx.lifecycle.runtimeCompose)
 
             implementation(libs.decompose.core)
-            implementation(libs.decompose.compose)
+//            implementation(libs.decompose.compose)
+            implementation("com.arkivanov.decompose:decompose:2.1.0")
+
             implementation(libs.essenty.lifecycle)
             implementation(libs.essenty.statekeeper)
             implementation(libs.essenty.instancekeeper)
             implementation(libs.essenty.backhandler)
+            implementation(libs.kotlinx.serialization)
+            implementation(libs.compose.material.iconsCore)
+            implementation(libs.decompose.extensionsComposeJetbrains)
+
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
