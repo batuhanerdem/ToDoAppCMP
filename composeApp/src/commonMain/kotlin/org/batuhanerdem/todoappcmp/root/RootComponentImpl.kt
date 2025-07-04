@@ -1,15 +1,15 @@
 import com.arkivanov.decompose.ComponentContext
+import com.arkivanov.decompose.DelicateDecomposeApi
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.bringToFront
 import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.value.Value
-import com.arkivanov.essenty.backhandler.BackHandler
 import org.batuhanerdem.todoappcmp.model.root.RootComponent
 import org.batuhanerdem.todoappcmp.navigation.TabConfig
-import org.batuhanerdem.todoappcmp.root.DefaultAddEditComponent
-import org.batuhanerdem.todoappcmp.root.DefaultHomeComponent
-import org.batuhanerdem.todoappcmp.root.DefaultSettingsComponent
+import org.batuhanerdem.todoappcmp.ui.add_edit.DefaultAddEditComponent
+import org.batuhanerdem.todoappcmp.ui.home.DefaultHomeComponent
+import org.batuhanerdem.todoappcmp.ui.settings.DefaultSettingsComponent
 
 
 class RootComponentImpl(
@@ -26,6 +26,7 @@ class RootComponentImpl(
         childFactory = ::createChild,
     )
 
+    @OptIn(DelicateDecomposeApi::class)
     private fun createChild(
         config: TabConfig, componentContext: ComponentContext
     ): RootComponent.Child = when (config) {
@@ -38,7 +39,7 @@ class RootComponentImpl(
         )
 
         is TabConfig.Settings -> RootComponent.Child.SettingsChild(
-            DefaultSettingsComponent(componentContext)
+            DefaultSettingsComponent(componentContext, { navigation.bringToFront(TabConfig.Home) })
         )
     }
 

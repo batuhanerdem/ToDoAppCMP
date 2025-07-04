@@ -1,9 +1,7 @@
 package org.batuhanerdem.todoappcmp.ui
 
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Home
@@ -16,14 +14,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.arkivanov.decompose.extensions.compose.subscribeAsState
 import org.batuhanerdem.todoappcmp.model.root.RootComponent
 import org.batuhanerdem.todoappcmp.navigation.TabConfig
-import org.batuhanerdem.todoappcmp.root.AddEditComponent
-import org.batuhanerdem.todoappcmp.root.HomeComponent
-import org.batuhanerdem.todoappcmp.root.SettingsComponent
+import org.batuhanerdem.todoappcmp.ui.add_edit.AddEditContent
+import org.batuhanerdem.todoappcmp.ui.home.HomeContent
+import org.batuhanerdem.todoappcmp.ui.settings.SettingsContent
 
 @Composable
 fun RootContent(component: RootComponent) {
@@ -74,24 +70,3 @@ fun BottomNavigationBar(
 }
 
 
-@Composable
-fun SettingsContent(x0: SettingsComponent) {
-    Column(Modifier.fillMaxSize().padding(30.dp)) {
-
-        Text("setme", fontSize = 30.sp)
-    }
-}
-
-@Composable
-fun AddEditContent(x0: AddEditComponent) {
-    Column(Modifier.fillMaxSize().padding(30.dp)) {
-        Text("add", fontSize = 30.sp)
-    }
-}
-
-@Composable
-fun HomeContent(x0: HomeComponent) {
-    Column(Modifier.fillMaxSize().padding(30.dp)) {
-        Text("Home", fontSize = 30.sp)
-    }
-}
