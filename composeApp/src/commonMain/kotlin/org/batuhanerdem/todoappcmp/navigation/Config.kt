@@ -3,13 +3,13 @@ package org.batuhanerdem.todoappcmp.navigation
 import kotlinx.serialization.Serializable
 
 @Serializable
-sealed class TabConfig  {
+sealed class Config {
     @Serializable
-    data object Home : TabConfig()
+    data object Home : Config()
 
     @Serializable
-    data object AddEdit : TabConfig()
+    data object Add : Config()
 
     @Serializable
-    data object Settings : TabConfig()
+    data object Settings : Config()
 }

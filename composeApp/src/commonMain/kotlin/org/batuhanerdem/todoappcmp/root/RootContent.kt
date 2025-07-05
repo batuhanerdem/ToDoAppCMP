@@ -1,11 +1,10 @@
-package org.batuhanerdem.todoappcmp.ui
+package org.batuhanerdem.todoappcmp.root
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.BottomAppBar
@@ -19,30 +18,31 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import com.arkivanov.decompose.extensions.compose.subscribeAsState
 import org.batuhanerdem.todoappcmp.model.root.RootComponent
-import org.batuhanerdem.todoappcmp.navigation.TabConfig
-import org.batuhanerdem.todoappcmp.ui.add_edit.AddEditContent
+import org.batuhanerdem.todoappcmp.navigation.Config
 import org.batuhanerdem.todoappcmp.ui.home.HomeContent
+import org.batuhanerdem.todoappcmp.ui.home.add.AddContent
 import org.batuhanerdem.todoappcmp.ui.settings.SettingsContent
+import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
-fun RootContent(component: RootComponent) {
+fun RootContent(component: RootComponent?) {
+    if (component == null) return
     val stack by component.stack.subscribeAsState()
 
-    Scaffold(
-        bottomBar = {
-            BottomNavigationBar(
-                selected = when (stack.active.instance) {
-                    is RootComponent.Child.HomeChild -> TabConfig.Home
-                    is RootComponent.Child.AddEditChild -> TabConfig.AddEdit
-                    is RootComponent.Child.SettingsChild -> TabConfig.Settings
-                }, onTabSelected = component::onTabSelected
-            )
-        }) { padding ->
+    Scaffold(topBar = {}, bottomBar = {
+        BottomNavigationBar(
+            selected = when (stack.active.instance) {
+                is RootComponent.Child.HomeChild -> Config.Home
+                is RootComponent.Child.SettingsChild -> Config.Settings
+                is RootComponent.Child.AddChild -> Config.Add
+            }, onTabSelected = component::onTabSelected
+        )
+    }) { padding ->
         Box(Modifier.fillMaxSize().background(Color.White)) {
             when (val child = stack.active.instance) {
                 is RootComponent.Child.HomeChild -> HomeContent(child.component)
-                is RootComponent.Child.AddEditChild -> AddEditContent(child.component)
                 is RootComponent.Child.SettingsChild -> SettingsContent(child.component)
+                is RootComponent.Child.AddChild -> AddContent(child.component)
             }
         }
     }
@@ -51,8 +51,9 @@ fun RootContent(component: RootComponent) {
 
 @Composable
 fun BottomNavigationBar(
-    selected: TabConfig, onTabSelected: (TabConfig) -> Unit
+    selected: Config, onTabSelected: (Config) -> Unit
 ) {
+    if (selected == Config.Add) return
     val itemColors = NavigationBarItemDefaults.colors(
         indicatorColor = Color.Transparent,
         selectedIconColor = Color.Black,
@@ -65,9 +66,9 @@ fun BottomNavigationBar(
         containerColor = Color.Transparent, modifier = Modifier.fillMaxHeight(0.15f)
     ) {
         NavigationBarItem(
-            selected = selected is TabConfig.Home,
+            selected = selected is Config.Home,
             colors = itemColors,
-            onClick = { onTabSelected(TabConfig.Home) },
+            onClick = { onTabSelected(Config.Home) },
             icon = {
                 Icon(
                     Icons.Filled.Home,
@@ -77,22 +78,9 @@ fun BottomNavigationBar(
             },
             label = { })
         NavigationBarItem(
-            selected = selected is TabConfig.AddEdit,
+            selected = selected is Config.Settings,
             colors = itemColors,
-            onClick = { onTabSelected(TabConfig.AddEdit) },
-            icon = {
-                Icon(
-                    Icons.Filled.Edit,
-                    contentDescription = "Add/Edit",
-                    modifier = Modifier.fillMaxSize(0.45f)
-
-                )
-            },
-            label = { })
-        NavigationBarItem(
-            selected = selected is TabConfig.Settings,
-            colors = itemColors,
-            onClick = { onTabSelected(TabConfig.Settings) },
+            onClick = { onTabSelected(Config.Settings) },
             icon = {
                 Icon(
                     Icons.Filled.Settings,
@@ -105,4 +93,9 @@ fun BottomNavigationBar(
 
 }
 
+@Preview
+@Composable
+fun PreviewRootContent() {
+    RootContent(null)
+}
 

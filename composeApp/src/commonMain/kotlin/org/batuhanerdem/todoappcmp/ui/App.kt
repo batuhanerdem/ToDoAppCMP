@@ -5,6 +5,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import com.arkivanov.decompose.DefaultComponentContext
 import com.arkivanov.essenty.lifecycle.LifecycleRegistry
+import org.batuhanerdem.todoappcmp.root.RootContent
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable

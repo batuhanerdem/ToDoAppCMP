@@ -4,11 +4,15 @@ import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.bringToFront
 import com.arkivanov.decompose.router.stack.childStack
+import com.arkivanov.decompose.router.stack.pop
+import com.arkivanov.decompose.router.stack.pushNew
 import com.arkivanov.decompose.value.Value
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.IO
 import org.batuhanerdem.todoappcmp.model.root.RootComponent
-import org.batuhanerdem.todoappcmp.navigation.TabConfig
-import org.batuhanerdem.todoappcmp.ui.add_edit.DefaultAddEditComponent
+import org.batuhanerdem.todoappcmp.navigation.Config
 import org.batuhanerdem.todoappcmp.ui.home.DefaultHomeComponent
+import org.batuhanerdem.todoappcmp.ui.home.add.AddComponent
 import org.batuhanerdem.todoappcmp.ui.settings.DefaultSettingsComponent
 
 
@@ -16,34 +20,38 @@ class RootComponentImpl(
     componentContext: ComponentContext
 ) : RootComponent, ComponentContext by componentContext {
 
-    private val navigation = StackNavigation<TabConfig>()
+    private val navigation = StackNavigation<Config>()
 
     override val stack: Value<ChildStack<*, RootComponent.Child>> = childStack(
         source = navigation,
-        serializer = TabConfig.serializer(),
-        initialConfiguration = TabConfig.Home,
+        serializer = Config.serializer(),
+        initialConfiguration = Config.Home,
         handleBackButton = true,
         childFactory = ::createChild,
     )
 
     @OptIn(DelicateDecomposeApi::class)
     private fun createChild(
-        config: TabConfig, componentContext: ComponentContext
+        config: Config, componentContext: ComponentContext
     ): RootComponent.Child = when (config) {
-        is TabConfig.Home -> RootComponent.Child.HomeChild(
-            DefaultHomeComponent(componentContext)
+        is Config.Home -> RootComponent.Child.HomeChild(
+            DefaultHomeComponent(componentContext, { navigation.pushNew(Config.Add) })
         )
 
-        is TabConfig.AddEdit -> RootComponent.Child.AddEditChild(
-            DefaultAddEditComponent(componentContext)
+        is Config.Add -> RootComponent.Child.AddChild(
+            AddComponent(
+                componentContext,
+                popBack = { navigation.pop() },
+            )
         )
 
-        is TabConfig.Settings -> RootComponent.Child.SettingsChild(
-            DefaultSettingsComponent(componentContext, { navigation.bringToFront(TabConfig.Home) })
+        is Config.Settings -> RootComponent.Child.SettingsChild(
+            DefaultSettingsComponent(
+                componentContext, { navigation.bringToFront(Config.Home) })
         )
     }
 
-    override fun onTabSelected(config: TabConfig) {
+    override fun onTabSelected(config: Config) {
         navigation.bringToFront(config)
     }
 
