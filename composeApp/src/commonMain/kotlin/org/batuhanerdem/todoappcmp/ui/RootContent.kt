@@ -1,19 +1,22 @@
 package org.batuhanerdem.todoappcmp.ui
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Icon
-import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import com.arkivanov.decompose.extensions.compose.subscribeAsState
 import org.batuhanerdem.todoappcmp.model.root.RootComponent
 import org.batuhanerdem.todoappcmp.navigation.TabConfig
@@ -35,7 +38,7 @@ fun RootContent(component: RootComponent) {
                 }, onTabSelected = component::onTabSelected
             )
         }) { padding ->
-        Box(Modifier.fillMaxSize()) {
+        Box(Modifier.fillMaxSize().background(Color.White)) {
             when (val child = stack.active.instance) {
                 is RootComponent.Child.HomeChild -> HomeContent(child.component)
                 is RootComponent.Child.AddEditChild -> AddEditContent(child.component)
@@ -50,23 +53,56 @@ fun RootContent(component: RootComponent) {
 fun BottomNavigationBar(
     selected: TabConfig, onTabSelected: (TabConfig) -> Unit
 ) {
-    NavigationBar {
+    val itemColors = NavigationBarItemDefaults.colors(
+        indicatorColor = Color.Transparent,
+        selectedIconColor = Color.Black,
+        selectedTextColor = Color.Black,
+        unselectedIconColor = Color.Gray,
+        unselectedTextColor = Color.Gray
+    )
+
+    BottomAppBar(
+        containerColor = Color.Transparent, modifier = Modifier.fillMaxHeight(0.15f)
+    ) {
         NavigationBarItem(
             selected = selected is TabConfig.Home,
+            colors = itemColors,
             onClick = { onTabSelected(TabConfig.Home) },
-            icon = { Icon(Icons.Filled.Home, contentDescription = "Home") },
-            label = { Text("Home") })
+            icon = {
+                Icon(
+                    Icons.Filled.Home,
+                    contentDescription = "Home",
+                    modifier = Modifier.fillMaxSize(0.45f)
+                )
+            },
+            label = { })
         NavigationBarItem(
             selected = selected is TabConfig.AddEdit,
+            colors = itemColors,
             onClick = { onTabSelected(TabConfig.AddEdit) },
-            icon = { Icon(Icons.Filled.Edit, contentDescription = "Add/Edit") },
-            label = { Text("Add/Edit") })
+            icon = {
+                Icon(
+                    Icons.Filled.Edit,
+                    contentDescription = "Add/Edit",
+                    modifier = Modifier.fillMaxSize(0.45f)
+
+                )
+            },
+            label = { })
         NavigationBarItem(
             selected = selected is TabConfig.Settings,
+            colors = itemColors,
             onClick = { onTabSelected(TabConfig.Settings) },
-            icon = { Icon(Icons.Filled.Settings, contentDescription = "Settings") },
-            label = { Text("Settings") })
+            icon = {
+                Icon(
+                    Icons.Filled.Settings,
+                    contentDescription = "Settings",
+                    modifier = Modifier.fillMaxSize(0.45f)
+                )
+            },
+            label = { })
     }
+
 }
 
 
