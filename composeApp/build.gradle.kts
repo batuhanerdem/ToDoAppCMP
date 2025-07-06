@@ -101,3 +101,11 @@ dependencies {
     debugImplementation(compose.uiTooling)
 }
 
+sqldelight {
+    databases {
+        create(name = "ToDoAppCMPDatabase") {
+            packageName.set("batuhanerdem.todoappcmp.db")
+        }
+    }
+}
+

@@ -1,0 +1,20 @@
+CREATE TABLE ToDo (
+    id TEXT NOT NULL,
+    title TEXT NOT NULL,
+    is_checked INTEGER NOT NULL
+);
+
+insertToDo:
+INSERT INTO ToDo(id,title,is_checked)
+VALUES(?,?,?);
+
+selectAllToDos:
+SELECT ToDo.*
+FROM ToDo;
+
+deleteToDo:
+DELETE FROM ToDo
+WHERE id = ?;
+
+clearDB:
+DELETE FROM ToDo;
