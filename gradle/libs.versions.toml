@@ -18,6 +18,7 @@ decompose = "3.4.0-alpha02"
 essenty = "2.5.0"
 compose-materialIcons = "1.7.3"
 koin = "3.2.0"
+sql-delight = "2.1.0"
 
 
 [libraries]
@@ -48,6 +49,10 @@ koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
 koin-test = { module = "io.insert-koin:koin-test", version.ref = "koin" }
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
 
+sqldelight-coroutine = { module = "app.cash.sqldelight:coroutines-extensions", version.ref = "sql-delight" }
+sqldelight-native = { module = "app.cash.sqldelight:native-driver", version.ref = "sql-delight" }
+sqldelight-android = { module = "app.cash.sqldelight:android-driver", version.ref = "sql-delight" }
+
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
@@ -56,3 +61,4 @@ composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "composeMul
 composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version = "2.1.0" }
+sqlDelight = { id = "app.cash.sqldelight", version.ref = "sql-delight" }

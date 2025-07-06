@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.serialization)
+    alias(libs.plugins.sqlDelight)
 }
 
 kotlin {
@@ -31,10 +32,8 @@ kotlin {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
 
-            implementation(libs.essenty.lifecycle)
-            implementation(libs.essenty.statekeeper)
-            implementation(libs.essenty.instancekeeper)
-            implementation(libs.essenty.backhandler)
+            implementation(libs.sqldelight.android)
+
 
         }
         commonMain.dependencies {
@@ -59,9 +58,14 @@ kotlin {
             implementation(libs.compose.material.iconsCore)
             implementation(libs.decompose.extensionsComposeJetbrains)
 
+            implementation(libs.sqldelight.coroutine)
+
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
+        }
+        iosMain.dependencies {
+            implementation(libs.sqldelight.native)
         }
     }
 }
