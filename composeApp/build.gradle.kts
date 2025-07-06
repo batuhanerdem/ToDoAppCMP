@@ -46,11 +46,10 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtimeCompose)
-            implementation(libs.essenty.lifecycle.coroutines)
 
             implementation(libs.decompose.core)
-//            implementation(libs.decompose.compose)
-            implementation("com.arkivanov.decompose:decompose:2.1.0")
+            implementation(libs.essenty.lifecycle.coroutines)
+            implementation(libs.koin.core)
 
             implementation(libs.essenty.lifecycle)
             implementation(libs.essenty.statekeeper)
