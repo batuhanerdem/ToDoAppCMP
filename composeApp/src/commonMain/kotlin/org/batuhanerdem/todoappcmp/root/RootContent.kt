@@ -25,11 +25,10 @@ import org.batuhanerdem.todoappcmp.ui.settings.SettingsContent
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
-fun RootContent(component: RootComponent?) {
-    if (component == null) return
+fun RootContent(component: RootComponent) {
     val stack by component.stack.subscribeAsState()
 
-    Scaffold(topBar = {}, bottomBar = {
+    Scaffold(bottomBar = {
         BottomNavigationBar(
             selected = when (stack.active.instance) {
                 is RootComponent.Child.HomeChild -> Config.Home
@@ -92,10 +91,3 @@ fun BottomNavigationBar(
     }
 
 }
-
-@Preview
-@Composable
-fun PreviewRootContent() {
-    RootContent(null)
-}
-
