@@ -2,6 +2,7 @@ package org.batuhanerdem.todoappcmp.ui.home.add
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -27,8 +28,8 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun AddContent(component: AddComponent) {
     BackButton(component)
-
-    Column(Modifier.padding(horizontal = 15.dp)) {
+    Column(Modifier.padding(horizontal = 20.dp)) {
+        Spacer(modifier = Modifier.padding(vertical = 35.dp))
         AddToDoText()
 
         var todoTitle by remember { mutableStateOf("") }
@@ -83,6 +84,7 @@ fun BackButton(component: AddComponent) {
                 Icon(
                     Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back"
                 )
-            })
+            }, contentPadding = PaddingValues(0.dp)
+        )
     }
 }
