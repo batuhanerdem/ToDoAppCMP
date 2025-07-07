@@ -33,6 +33,7 @@ kotlin {
             implementation(libs.androidx.activity.compose)
 
             implementation(libs.sqldelight.android)
+            implementation(libs.koin.android)
 
 
         }

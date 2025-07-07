@@ -1,7 +1,6 @@
 package org.batuhanerdem.todoappcmp.data.repository
 
 import batuhanerdem.todoappcmp.db.ToDoAppCMPDatabase
-import org.batuhanerdem.todoappcmp.data.db.DatabaseDriverFactory
 import org.batuhanerdem.todoappcmp.model.ToDo
 
 
