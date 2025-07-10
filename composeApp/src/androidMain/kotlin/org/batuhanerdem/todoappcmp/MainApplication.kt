@@ -6,7 +6,7 @@ import org.batuhanerdem.todoappcmp.di.sharedModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
-class App : Application() {
+class MainApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         initKoin()
@@ -15,7 +15,7 @@ class App : Application() {
     private fun initKoin() {
         val module = sharedModule + databaseModule
         startKoin {
-            androidContext(this@App)
+            androidContext(this@MainApplication)
             modules(module)
         }
     }

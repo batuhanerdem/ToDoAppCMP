@@ -18,3 +18,8 @@ WHERE id = ?;
 
 clearDB:
 DELETE FROM ToDo;
+
+updateToDo:
+UPDATE ToDo
+SET title = ?, is_checked = ?
+WHERE id = ?;

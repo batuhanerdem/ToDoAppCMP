@@ -18,6 +18,15 @@ class ToDoRepository(private val database: ToDoAppCMPDatabase) {
         database.toDoAppCMPDatabaseQueries.deleteToDo(id)
     }
 
+    fun clearDB() {
+        database.toDoAppCMPDatabaseQueries.clearDB()
+    }
+
+    fun updateToDo(todo: ToDo) {
+        val isCheckedLong = if (todo.isSelected) 1L else 0L
+        database.toDoAppCMPDatabaseQueries.updateToDo(todo.title, isCheckedLong, todo.id)
+    }
+
 
     private fun mapToDos(id: String, title: String, isChecked: Long): ToDo {
         val isSelected = isChecked.toInt() == 1

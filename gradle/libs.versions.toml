@@ -17,7 +17,7 @@ kotlin = "2.2.0"
 decompose = "3.4.0-alpha02"
 essenty = "2.5.0"
 compose-materialIcons = "1.7.3"
-koin = "3.2.0"
+koin = "4.1.0"
 sql-delight = "2.1.0"
 
 

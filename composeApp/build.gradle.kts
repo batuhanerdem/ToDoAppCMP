@@ -23,7 +23,12 @@ kotlin {
         iosTarget.binaries.framework {
             baseName = "ComposeApp"
             isStatic = true
+            linkerOpts("-lsqlite3", "-F/usr/lib")
+            export(libs.decompose.core)
+            export(libs.essenty.lifecycle)
         }
+
+
     }
 
     sourceSets {
@@ -47,11 +52,11 @@ kotlin {
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtimeCompose)
 
-            implementation(libs.decompose.core)
+            api(libs.decompose.core)
             implementation(libs.essenty.lifecycle.coroutines)
             implementation(libs.koin.core)
 
-            implementation(libs.essenty.lifecycle)
+            api(libs.essenty.lifecycle)
             implementation(libs.essenty.statekeeper)
             implementation(libs.essenty.instancekeeper)
             implementation(libs.essenty.backhandler)
@@ -60,6 +65,8 @@ kotlin {
             implementation(libs.decompose.extensionsComposeJetbrains)
 
             implementation(libs.sqldelight.coroutine)
+            implementation("com.benasher44:uuid:0.6.0")
+
 
         }
         commonTest.dependencies {

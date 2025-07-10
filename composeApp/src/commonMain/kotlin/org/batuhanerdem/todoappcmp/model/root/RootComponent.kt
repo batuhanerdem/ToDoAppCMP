@@ -1,9 +1,9 @@
 package org.batuhanerdem.todoappcmp.model.root
 
+import org.batuhanerdem.todoappcmp.ui.home.DefaultHomeComponent
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.value.Value
 import org.batuhanerdem.todoappcmp.navigation.Config
-import org.batuhanerdem.todoappcmp.ui.home.DefaultHomeComponent
 import org.batuhanerdem.todoappcmp.ui.home.add.AddComponent
 import org.batuhanerdem.todoappcmp.ui.settings.DefaultSettingsComponent
 
