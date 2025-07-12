@@ -9,9 +9,9 @@ import com.arkivanov.decompose.router.stack.pop
 import com.arkivanov.decompose.value.Value
 import org.batuhanerdem.todoappcmp.model.root.RootComponent
 import org.batuhanerdem.todoappcmp.navigation.Config
-import org.batuhanerdem.todoappcmp.ui.home.DefaultHomeComponent
+import org.batuhanerdem.todoappcmp.ui.home.HomeComponent
 import org.batuhanerdem.todoappcmp.ui.home.add.AddComponent
-import org.batuhanerdem.todoappcmp.ui.settings.DefaultSettingsComponent
+import org.batuhanerdem.todoappcmp.ui.settings.SettingsComponent
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
 
@@ -37,7 +37,7 @@ class RootComponentImpl(
 
         return when (config) {
             is Config.Home -> RootComponent.Child.HomeChild(
-                DefaultHomeComponent(childContext1, { navigation.bringToFront(Config.Add) }, get())
+                HomeComponent(childContext1, { navigation.bringToFront(Config.Add) }, get())
             )
 
             is Config.Add -> RootComponent.Child.AddChild(
@@ -47,7 +47,7 @@ class RootComponentImpl(
             )
 
             is Config.Settings -> RootComponent.Child.SettingsChild(
-                DefaultSettingsComponent(
+                SettingsComponent(
                     componentContext
                 )
             )

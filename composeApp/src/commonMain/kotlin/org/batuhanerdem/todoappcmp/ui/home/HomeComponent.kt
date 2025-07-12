@@ -7,7 +7,7 @@ import com.arkivanov.essenty.lifecycle.Lifecycle
 import org.batuhanerdem.todoappcmp.data.repository.ToDoRepository
 import org.batuhanerdem.todoappcmp.model.ToDo
 
-class DefaultHomeComponent(
+class HomeComponent(
     componentContext: ComponentContext,
     private val onPressAddButton: () -> Unit,
     private val repo: ToDoRepository

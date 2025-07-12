@@ -11,7 +11,7 @@ import androidx.compose.ui.unit.sp
 
 
 @Composable
-fun SettingsContent(component: DefaultSettingsComponent) {
+fun SettingsContent(component: SettingsComponent) {
     Column(Modifier.fillMaxSize().padding(30.dp)) {
 
         Text("setme", fontSize = 30.sp)

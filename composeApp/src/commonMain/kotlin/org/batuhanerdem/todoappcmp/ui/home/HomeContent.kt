@@ -37,7 +37,7 @@ import com.arkivanov.decompose.extensions.compose.subscribeAsState
 import org.batuhanerdem.todoappcmp.model.ToDo
 
 @Composable
-fun HomeContent(component: DefaultHomeComponent) {
+fun HomeContent(component: HomeComponent) {
     val todos = component.todos.subscribeAsState()
     var isEditMode by remember { mutableStateOf(false) }
     Column {
@@ -107,7 +107,7 @@ fun ToDoItem(todo: ToDo, onToggle: () -> Unit, onDelete: () -> Unit, isEditMode:
 }
 
 @Composable
-fun Buttons(component: DefaultHomeComponent, isEditMode: Boolean, editOnClick: () -> Unit) {
+fun Buttons(component: HomeComponent, isEditMode: Boolean, editOnClick: () -> Unit) {
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween,
