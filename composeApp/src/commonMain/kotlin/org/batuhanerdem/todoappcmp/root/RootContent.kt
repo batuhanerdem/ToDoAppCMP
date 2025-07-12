@@ -110,7 +110,7 @@ fun BottomNavigationBar(
                 Icon(
                     Icons.Filled.Home,
                     contentDescription = "Home",
-                    modifier = Modifier.fillMaxSize(0.45f)
+                    modifier = Modifier.fillMaxSize(0.37f)
                 )
             },
             label = { })
@@ -122,7 +122,7 @@ fun BottomNavigationBar(
                 Icon(
                     Icons.Filled.Settings,
                     contentDescription = "Settings",
-                    modifier = Modifier.fillMaxSize(0.45f)
+                    modifier = Modifier.fillMaxSize(0.37f)
                 )
             },
             label = { })

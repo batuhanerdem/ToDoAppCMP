@@ -45,17 +45,27 @@ fun AddContent(component: AddComponent, onToDoSaved: () -> Unit, onToDoIsBlank: 
             shape = RoundedCornerShape(12.dp)
         )
 
-        Button(onClick = {
-            if (todoTitle.isBlank()) {
-                onToDoIsBlank()
-                return@Button
-            }
-            component.addTodo(todoTitle)
-            onToDoSaved()
-            todoTitle = ""
-        }, modifier = Modifier.fillMaxWidth().padding(vertical = 16.dp), content = {
-            Text("Save")
-        })
+        Button(
+            onClick = {
+                if (todoTitle.isBlank()) {
+                    onToDoIsBlank()
+                    return@Button
+                }
+                component.addTodo(todoTitle)
+                onToDoSaved()
+                todoTitle = ""
+            },
+            modifier = Modifier.fillMaxWidth().padding(vertical = 16.dp),
+            content = {
+                Text("Save")
+            },
+            colors = ButtonColors(
+                contentColor = Color.White,
+                disabledContentColor = Color.Black,
+                containerColor = Color.Black,
+                disabledContainerColor = Color.Black
+            )
+        )
 
     }
 }

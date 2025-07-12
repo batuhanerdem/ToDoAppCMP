@@ -8,7 +8,9 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
@@ -27,6 +29,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -66,6 +69,7 @@ fun HomeContent(component: DefaultHomeComponent) {
                     )
                 }
                 item {
+                    Spacer(modifier = Modifier.padding(vertical = 10.dp))
                     Spacer(modifier = Modifier.fillMaxHeight(0.15f))
                 }
 
@@ -86,7 +90,12 @@ fun ToDoItem(todo: ToDo, onToggle: () -> Unit, onDelete: () -> Unit, isEditMode:
         ) {
             Checkbox(
                 checked = todo.isSelected, onCheckedChange = { onToggle() })
-            Text(text = todo.title, textAlign = TextAlign.Center)
+            Text(
+                text = todo.title,
+                textAlign = TextAlign.Center,
+                fontWeight = FontWeight.SemiBold,
+                fontSize = 20.sp
+            )
         }
         if (isEditMode) Button(
             onClick = { onDelete() },
@@ -109,13 +118,22 @@ fun Buttons(component: DefaultHomeComponent, isEditMode: Boolean, editOnClick: (
             colors = buttonColors,
             contentPadding = PaddingValues(0.dp),
         ) {
-            Icon(Icons.Default.Add, contentDescription = "add", tint = Color.Black)
+            Icon(
+                Icons.Default.Add,
+                contentDescription = "add",
+                tint = Color.Black,
+                modifier = Modifier.height(35.dp).width(35.dp)
+            )
         }
 
         Button(onClick = {
             editOnClick()
         }, colors = buttonColors) {
-            Text(if (!isEditMode) "Edit" else "Cancel")
+            Text(
+                if (!isEditMode) "Edit" else "Cancel",
+                fontSize = 21.sp,
+                fontWeight = FontWeight.ExtraBold
+            )
         }
     }
 }

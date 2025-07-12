@@ -6,7 +6,6 @@ import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.bringToFront
 import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.router.stack.pop
-import com.arkivanov.decompose.router.stack.pushNew
 import com.arkivanov.decompose.value.Value
 import org.batuhanerdem.todoappcmp.model.root.RootComponent
 import org.batuhanerdem.todoappcmp.navigation.Config
@@ -49,7 +48,8 @@ class RootComponentImpl(
 
             is Config.Settings -> RootComponent.Child.SettingsChild(
                 DefaultSettingsComponent(
-                    componentContext, { navigation.bringToFront(Config.Home) })
+                    componentContext
+                )
             )
         }
     }
