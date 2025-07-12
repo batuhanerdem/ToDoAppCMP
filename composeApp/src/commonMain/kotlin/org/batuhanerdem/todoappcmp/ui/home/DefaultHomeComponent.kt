@@ -13,9 +13,6 @@ class DefaultHomeComponent(
     private val repo: ToDoRepository
 ) : ComponentContext by componentContext {
 
-    // SnapshotStateList triggers recomposition on mutation
-//    val todos = mutableStateListOf<ToDo>()
-//    var todos: Value<MutableList<ToDo>> = MutableValue(mutableListOf())
     private val _todos = MutableValue<MutableList<ToDo>>(mutableListOf())
     val todos: Value<List<ToDo>> get() = _todos
 
@@ -30,15 +27,6 @@ class DefaultHomeComponent(
         })
     }
 
-
-    //    fun toggleTodoSelection(id: String) {
-//        val index = todos.value.indexOfFirst { it.id == id }
-//        if (index != -1) {
-//            val todo = todos.value[index]
-//            _todos.value[index] = todo.copy(isSelected = !todo.isSelected)
-//            _todos.value = todos.value.toMutableList()
-//        }
-//    }
     fun toggleTodoSelection(id: String) {
         _todos.value = _todos.value.map {
             if (it.id == id) {
@@ -47,6 +35,15 @@ class DefaultHomeComponent(
                 newToDo
             } else it
         }.toMutableList()
+    }
+
+    fun deleteToDo(toDo: ToDo) {
+        repo.deleteToDo(toDo.id)
+//        _todos.value.remove(toDo)
+//        _todos.value = _todos.value.toMutableList()
+        repo.deleteToDo(toDo.id)
+        _todos.value = _todos.value.filter { it.id != toDo.id }.toMutableList()
+
     }
 
     fun onAddButtonPressed() {

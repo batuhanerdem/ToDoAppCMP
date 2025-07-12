@@ -26,7 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun AddContent(component: AddComponent) {
+fun AddContent(component: AddComponent, onToDoSaved: () -> Unit, onToDoIsBlank: () -> Unit) {
     BackButton(component)
     Column(Modifier.padding(horizontal = 20.dp)) {
         Spacer(modifier = Modifier.padding(vertical = 35.dp))
@@ -45,12 +45,17 @@ fun AddContent(component: AddComponent) {
             shape = RoundedCornerShape(12.dp)
         )
 
-        Button(
-            onClick = { component.addTodo(todoTitle) },
-            modifier = Modifier.fillMaxWidth().padding(vertical = 16.dp),
-            content = {
-                Text("Save")
-            })
+        Button(onClick = {
+            if (todoTitle.isBlank()) {
+                onToDoIsBlank()
+                return@Button
+            }
+            component.addTodo(todoTitle)
+            onToDoSaved()
+            todoTitle = ""
+        }, modifier = Modifier.fillMaxWidth().padding(vertical = 16.dp), content = {
+            Text("Save")
+        })
 
     }
 }
