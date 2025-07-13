@@ -14,6 +14,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -42,30 +43,33 @@ fun AddContent(component: AddComponent, onToDoSaved: () -> Unit, onToDoIsBlank: 
             label = { Text("Todo Title") },
             placeholder = { Text("Enter title") },
             modifier = Modifier.fillMaxWidth().padding(vertical = 16.dp),
-            shape = RoundedCornerShape(12.dp)
+            shape = RoundedCornerShape(12.dp),
+            colors = OutlinedTextFieldDefaults.colors().copy(
+                    cursorColor = Color.Black,
+                    focusedIndicatorColor = Color.Black,
+                    focusedLabelColor = Color.Black,
+                    unfocusedLabelColor = Color.Black
+                )
         )
 
         Button(
             onClick = {
-                if (todoTitle.isBlank()) {
-                    onToDoIsBlank()
-                    return@Button
-                }
-                component.addTodo(todoTitle)
-                onToDoSaved()
-                todoTitle = ""
-                component.back()
-            },
-            modifier = Modifier.fillMaxWidth().padding(vertical = 16.dp),
-            content = {
-                Text("Save")
-            },
-            colors = ButtonColors(
-                contentColor = Color.White,
-                disabledContentColor = Color.Black,
-                containerColor = Color.Black,
-                disabledContainerColor = Color.Black
-            )
+            if (todoTitle.isBlank()) {
+                onToDoIsBlank()
+                return@Button
+            }
+            component.addTodo(todoTitle)
+            onToDoSaved()
+            todoTitle = ""
+            component.back()
+        }, modifier = Modifier.fillMaxWidth().padding(vertical = 16.dp), content = {
+            Text("Save")
+        }, colors = ButtonColors(
+            contentColor = Color.White,
+            disabledContentColor = Color.Black,
+            containerColor = Color.Black,
+            disabledContainerColor = Color.Black
+        )
         )
 
     }
