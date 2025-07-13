@@ -19,10 +19,8 @@ class HomeComponent(
     init {
         lifecycle.subscribe(object : Lifecycle.Callbacks {
             override fun onResume() {
-                println("HomeComponent resumed")
                 _todos.value.clear()
                 _todos.value = repo.getToDos().toMutableList()
-                println("compoentn ${todos.value}")
             }
         })
     }
@@ -38,9 +36,6 @@ class HomeComponent(
     }
 
     fun deleteToDo(toDo: ToDo) {
-        repo.deleteToDo(toDo.id)
-//        _todos.value.remove(toDo)
-//        _todos.value = _todos.value.toMutableList()
         repo.deleteToDo(toDo.id)
         _todos.value = _todos.value.filter { it.id != toDo.id }.toMutableList()
 
