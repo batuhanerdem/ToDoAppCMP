@@ -19,6 +19,7 @@ import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.Checkbox
+import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -89,7 +90,12 @@ fun ToDoItem(todo: ToDo, onToggle: () -> Unit, onDelete: () -> Unit, isEditMode:
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Checkbox(
-                checked = todo.isSelected, onCheckedChange = { onToggle() })
+                checked = todo.isSelected,
+                onCheckedChange = { onToggle() },
+                colors = CheckboxDefaults.colors().copy(
+                    checkedCheckmarkColor = Color.White, checkedBoxColor = Color.Black
+                )
+            )
             Text(
                 text = todo.title,
                 textAlign = TextAlign.Center,
