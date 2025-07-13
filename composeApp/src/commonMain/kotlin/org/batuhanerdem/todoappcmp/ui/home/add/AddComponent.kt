@@ -15,12 +15,10 @@ class AddComponent(
         val id = uuid4().toString()
         val newTodo = ToDo(id, title)
         repo.insertToDo(newTodo)
-        val list = repo.getToDos()
-        println("TESTING $list")
     }
 
 
-    fun onPressPopBack() {
+    fun back() {
         popBack()
     }
 

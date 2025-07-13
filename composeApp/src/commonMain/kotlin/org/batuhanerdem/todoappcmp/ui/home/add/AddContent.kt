@@ -54,6 +54,7 @@ fun AddContent(component: AddComponent, onToDoSaved: () -> Unit, onToDoIsBlank: 
                 component.addTodo(todoTitle)
                 onToDoSaved()
                 todoTitle = ""
+                component.back()
             },
             modifier = Modifier.fillMaxWidth().padding(vertical = 16.dp),
             content = {
@@ -90,7 +91,7 @@ fun BackButton(component: AddComponent) {
         horizontalArrangement = Arrangement.Start
     ) {
         Button(
-            onClick = { component.onPressPopBack() }, colors = ButtonColors(
+            onClick = { component.back() }, colors = ButtonColors(
                 containerColor = Color.Transparent,
                 contentColor = Color.Black,
                 disabledContainerColor = Color.Transparent,
