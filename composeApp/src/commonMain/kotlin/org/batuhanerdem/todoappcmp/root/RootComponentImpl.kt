@@ -33,11 +33,10 @@ class RootComponentImpl(
     private fun createChild(
         config: Config, componentContext: ComponentContext
     ): RootComponent.Child {
-        val childContext1 = componentContext.childContext("home")
 
         return when (config) {
             is Config.Home -> RootComponent.Child.HomeChild(
-                HomeComponent(childContext1, { navigation.bringToFront(Config.Add) }, get())
+                HomeComponent(componentContext, { navigation.bringToFront(Config.Add) }, get())
             )
 
             is Config.Add -> RootComponent.Child.AddChild(
