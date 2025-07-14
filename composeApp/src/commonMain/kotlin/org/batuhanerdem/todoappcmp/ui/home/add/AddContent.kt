@@ -28,7 +28,7 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun AddContent(component: AddComponent, onToDoSaved: () -> Unit, onToDoIsBlank: () -> Unit) {
-    BackButton(component)
+    BackButton(component::back)
     Column(Modifier.padding(horizontal = 20.dp)) {
         Spacer(modifier = Modifier.padding(vertical = 35.dp))
         AddToDoText()
@@ -45,31 +45,31 @@ fun AddContent(component: AddComponent, onToDoSaved: () -> Unit, onToDoIsBlank: 
             modifier = Modifier.fillMaxWidth().padding(vertical = 16.dp),
             shape = RoundedCornerShape(12.dp),
             colors = OutlinedTextFieldDefaults.colors().copy(
-                    cursorColor = Color.Black,
-                    focusedIndicatorColor = Color.Black,
-                    focusedLabelColor = Color.Black,
-                    unfocusedLabelColor = Color.Black
-                )
+                cursorColor = Color.Black,
+                focusedIndicatorColor = Color.Black,
+                focusedLabelColor = Color.Black,
+                unfocusedLabelColor = Color.Black
+            )
         )
 
         Button(
             onClick = {
-            if (todoTitle.isBlank()) {
-                onToDoIsBlank()
-                return@Button
-            }
-            component.addTodo(todoTitle)
-            onToDoSaved()
-            todoTitle = ""
-            component.back()
-        }, modifier = Modifier.fillMaxWidth().padding(vertical = 16.dp), content = {
-            Text("Save")
-        }, colors = ButtonColors(
-            contentColor = Color.White,
-            disabledContentColor = Color.Black,
-            containerColor = Color.Black,
-            disabledContainerColor = Color.Black
-        )
+                if (todoTitle.isBlank()) {
+                    onToDoIsBlank()
+                    return@Button
+                }
+                component.addTodo(todoTitle)
+                onToDoSaved()
+                todoTitle = ""
+                component.back()
+            }, modifier = Modifier.fillMaxWidth().padding(vertical = 16.dp), content = {
+                Text("Save")
+            }, colors = ButtonColors(
+                contentColor = Color.White,
+                disabledContentColor = Color.Black,
+                containerColor = Color.Black,
+                disabledContainerColor = Color.Black
+            )
         )
 
     }
@@ -89,13 +89,13 @@ fun AddToDoText() {
 }
 
 @Composable
-fun BackButton(component: AddComponent) {
+fun BackButton(onBackClicked: () -> Unit) {
     Row(
         modifier = Modifier.fillMaxWidth().padding(vertical = 30.dp),
         horizontalArrangement = Arrangement.Start
     ) {
         Button(
-            onClick = { component.back() }, colors = ButtonColors(
+            onClick = { onBackClicked() }, colors = ButtonColors(
                 containerColor = Color.Transparent,
                 contentColor = Color.Black,
                 disabledContainerColor = Color.Transparent,
